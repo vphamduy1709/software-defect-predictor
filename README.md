@@ -23,24 +23,28 @@ The repository is organized into a modular 3-layer architecture, applying Softwa
 ## 📁 Repository Layout
 
 ```text
-defect-predictor/
-├── data/                  # Sample datasets and benchmarks
-├── app/
-│   └── app.py             # Streamlit web application interface
-├── src/                   # Main source code directory
-│   ├── __init__.py
-│   ├── data_utils.py      # Core data loaders, AST parsing, and SMOTE-PENN utilities
-│   ├── traditional/
-│   │   ├── __init__.py
-│   │   └── ranker.py      # Traditional LTR models and statistical evaluations
-│   ├── deep_learning/
-│   │   ├── __init__.py
-│   │   └── tree_lstm.py   # Tree-LSTM Cell & Neural Network architecture
-│   └── pipelines/
-│       ├── __init__.py
-│       ├── train_topk.py  # Many-to-One CPDP experiment pipeline
-│       ├── train_within.py# Within-Project defect prediction script
-│       └── train_cross.py # Cross-Project (Leave-One-Out) evaluation script
-├── config.json            # Centralized hyperparameter configuration file
-├── requirements.txt       # Project dependencies
-└── README.md              # Project documentation
+software-defect-predictor/
+├── .venv/                 # Python virtual environment
+├── app/                   # App configurations and resources
+├── data/                  # Input datasets and target label CSVs
+├── src/                   # Main source code directory[cite: 4]
+│   ├── Artifacts/         # Directory containing trained model weights and metadata[cite: 4]
+│   │   ├── clf_within_poi.joblib       # Classifier model (Random Forest/XGBoost)[cite: 4]
+│   │   ├── ranker_cross_topk.joblib    # Ranker model (LightGBM)[cite: 4]
+│   │   ├── scaler_within_poi.joblib    # Feature scaler (StandardScaler)[cite: 4]
+│   │   ├── treelstm_within_poi.pth     # Trained Tree-LSTM PyTorch weights[cite: 4]
+│   │   └── vocab_within_poi.json       # Token-to-ID vocabulary mapping[cite: 4]
+│   ├── lstm/              # Tree-LSTM Deep Learning module[cite: 4]
+│   │   ├── ast_parser.py  # Parses Java source files into Abstract Syntax Tree (AST) structures[cite: 4]
+│   │   ├── config.py      # Global hyperparameter config, seed controls, and device (CUDA/CPU) setup[cite: 4]
+│   │   ├── data_loader.py # Discovers projects and loads CSV/AST datasets[cite: 4]
+│   │   ├── dataset.py     # Defines the Vocab class and the PyTorch TreeDataset[cite: 4]
+│   │   ├── main.py        # Orchestrates the within-project and cross-project training pipelines[cite: 4]
+│   │   ├── model.py       # Child-sum Tree-LSTM and Attention Pooling architecture[cite: 4]
+│   │   └── trainer.py     # Handles pretraining, feature extraction, and ML classifier training[cite: 4]
+│   ├── top_k/             # Learning-to-Rank (LTR) ranking module[cite: 4]
+│   │   ├── train_ranker.py# Trains LTR ranker models (LambdaMART, GBDT, etc.) via LightGBM[cite: 4]
+│   │   └── utils.py       # Implements SMOTE-PENN data balancing and extracts 20 static metrics[cite: 4]
+│   └── demo.py            # Streamlit web application for interactive defect prediction and Top-K ranking[cite: 4]
+├── README.md              # Project setup, execution instructions, and documentation
+└── requirements.txt       # List of Python dependencies and package versions

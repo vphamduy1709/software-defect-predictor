@@ -1,9 +1,7 @@
 import torch
 from torch.utils.data import Dataset
 
-# =============================================================
-# 5. VOCABULARY & 6. DATASET
-# =============================================================
+
 class Vocab:
     PAD_ID = 0; UNK_ID = 1
 

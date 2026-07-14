@@ -2,9 +2,7 @@ import torch
 import torch.nn as nn
 from collections import deque
 
-# =============================================================
-# 7. MODEL: Tree-LSTM + Attention
-# =============================================================
+
 class TreeLSTMCell(nn.Module):
     def __init__(self, x_dim: int, h_dim: int):
         super().__init__()

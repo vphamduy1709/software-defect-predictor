@@ -4,9 +4,7 @@ from pathlib import Path
 import pandas as pd
 from ast_parser import java_file_to_ast
 
-# =============================================================
-# 2. AUTO-DISCOVER & 4. DATA LOADING
-# =============================================================
+
 def discover_projects(data_root: str) -> dict:
     root = Path(data_root)
     projects = {}
